@@ -1,4 +1,4 @@
-import { CreateArticleInput } from '../type';
+import { CreateArticleInput } from '@/features/articles/type';
 
 export const useCreateArticle = () => {
   return {

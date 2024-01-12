@@ -1,17 +1,28 @@
 'use client';
-import { Article } from '../type';
+import { ArticleDetails } from '@/features/articles/type';
+import Image from 'next/image';
 
 interface ArticleDetailProps {
-  article: Article;
-  onUpdate: (id: Article['id']) => void;
+  article: ArticleDetails;
 }
 
-const ArticleDetail = ({ article, onUpdate }: ArticleDetailProps) => {
+const ArticleDetail = ({
+  article: { image, title, content },
+}: ArticleDetailProps) => {
   return (
-    <>
-      {article.title}
-      <button onClick={() => onUpdate(article.id)}>Update</button>
-    </>
+    <article className="container">
+      <div className="relative h-[500px]">
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="(min-width: 800px) 50vw, 100vw"
+          className="object-cover "
+        />
+      </div>
+      <h2 className="my-4 text-center text-4xl font-bold">{title}</h2>
+      <p className="my-4 text-xl">{content}</p>
+    </article>
   );
 };
 

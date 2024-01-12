@@ -1,9 +1,5 @@
-import { z } from 'zod'
-import { add, update } from './validator';
-export interface Article {
-    id: number;
-    title: string;
-}
+import { findAll, findById } from './api';
 
-export type CreateArticleInput = z.infer<typeof add>
-export type UpdateArticleInput = z.infer<typeof update>
+export type ArticleItem = Awaited<ReturnType<typeof findAll>>[number];
+
+export type ArticleDetails = NonNullable<Awaited<ReturnType<typeof findById>>>;

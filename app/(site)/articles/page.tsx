@@ -1,4 +1,4 @@
-import { findAll } from '@/features/announcements/api';
+import { findAll } from '@/features/articles/api';
 import ArticleList from '@/features/articles/components/ArticleList';
 import CreateArticle from '@/features/articles/components/CreateArticle';
 
@@ -7,7 +7,7 @@ const ArticlesPage = async () => {
 
   return (
     <>
-      <ArticleList articles={articles} />;
+      <ArticleList articles={articles} />
       <CreateArticle />
     </>
   );

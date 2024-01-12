@@ -1,6 +1,6 @@
 'use client';
 
-import { useCreateArticle } from '../hooks/api';
+import { useCreateArticle } from '@/features/articles/hooks/api';
 
 const CreateArticle = () => {
   const { mutateAsync } = useCreateArticle();

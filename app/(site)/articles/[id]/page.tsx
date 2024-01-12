@@ -16,7 +16,6 @@ export const generateStaticParams = async () => {
 // Server Action
 const updateArticle = async (id: Article['id']) => {
   'use server';
-
   await update(id, { title: 'YYY' });
   revalidatePath(`/articles/${id}`);
 };
