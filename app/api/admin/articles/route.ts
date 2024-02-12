@@ -1,22 +1,18 @@
-import { create } from '@/features/articles/api';
-import { CreateArticleInput } from '@/features/articles/type';
-import { add } from '@/features/articles/validator';
+import * as api from '@/features/articles/admin/api';
+import { AddArticleInput } from '@/features/articles/admin/type';
 import { revalidatePath } from 'next/cache';
+import * as validator from '@/features/articles/admin/validator';
 
 export const POST = async (req: Request) => {
-  const form = await (req.json() as Promise<CreateArticleInput>);
-  const formValidation = await add.safeParseAsync(form);
+  const formData = await req.formData();
+  const image = formData.get('image') as File | null;
+  const article = await api.add({
+    title: formData.get('title') as string,
+    excerpt: formData.get('excerpt') as string,
+    content: formData.get('content') as string,
+    image,
+  });
 
-  if (!formValidation.success) {
-    return new Response(JSON.stringify(formValidation.error), {
-      status: 422,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
-
-  const article = await create(formValidation.data);
   revalidatePath('/articles');
   return new Response(JSON.stringify(article), {
     status: 201,

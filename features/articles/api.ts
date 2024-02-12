@@ -26,3 +26,4 @@ export const findById = async (id: number) => {
 
   return article;
 };
+

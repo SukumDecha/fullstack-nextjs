@@ -1,16 +1,24 @@
-export const GET = () => {
-  return Response.json([
-    {
-      id: 1,
-      reason: 'Reason #1',
-    },
-    {
-      id: 2,
-      reason: 'Reason #2',
-    },
-    {
-      id: 3,
-      reason: 'Reason #3',
-    },
-  ]);
+import { AddLeaveInput } from '@/features/leaves/type';
+import * as validators from '@/features/leaves/validators';
+import * as api from '@/features/leaves/api';
+export const GET = async () => {
+  const leaves = await api.findAll();
+
+  return Response.json(leaves);
+};
+
+export const POST = async (req: Request) => {
+  const body = await (req.json() as Promise<AddLeaveInput>);
+
+  try {
+    const form = await validators.add.parseAsync(body);
+    const leave = await api.add(form);
+    return new Response(JSON.stringify(leave), {
+      status: 201,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify(error), {
+      status: 422,
+    });
+  }
 };

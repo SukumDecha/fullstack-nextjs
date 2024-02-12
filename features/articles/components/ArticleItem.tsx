@@ -9,14 +9,15 @@ import {
 } from '@/features/shadcn/components/ui/card';
 import { truncate } from 'lodash';
 import Image from 'next/image';
+import { getImagePath } from '@/features/shared/helpers/upload';
 
 const ArticleItem = ({ id, title, excerpt, image }: types.ArticleItem) => {
   return (
     <Link href={`/articles/${id}`}>
-      <Card className='h-full'>
+      <Card className="h-full">
         <div className="relative h-[200px]">
           <Image
-            src={image}
+            src={getImagePath(image)}
             alt={title}
             fill
             sizes="(min-width: 800px) 50vw, 100vw"

@@ -1,5 +1,6 @@
 'use client';
 
+import AuthMenu from '@/features/auth/components/AuthMenu';
 import { Button } from '@/features/shadcn/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -35,6 +36,8 @@ const Header = () => {
       <NavLink path="/leaves">Leaves</NavLink>
       <NavLink path="/articles">Articles</NavLink>
       <NavLink path="/announcements">Announcements</NavLink>
+      <div className="!ml-auto h-[40px] w-[1px] bg-gray-300"></div>
+      <AuthMenu />
     </nav>
   );
 };

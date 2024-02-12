@@ -3,13 +3,19 @@ import z from 'zod';
 import * as validators from './validator';
 import { slugify } from '@/features/shared/helpers/slugify';
 import { revalidatePath } from 'next/cache';
+import { saveFile } from '@/features/shared/helpers/file';
 
 export const add = async (input: z.infer<typeof validators.add>) => {
+  if (!input.image) {
+    throw Error('No image uploaded');
+  }
+  
+  const image = await saveFile(input.image);
   const article = await db.article.create({
     data: {
       ...input,
       userId: 1,
-      image: 'http://12345653.com',
+      image,
       slug: slugify(input.title),
     },
   });
@@ -30,7 +36,7 @@ export const update = async (
     data: {
       ...input,
       userId: 1,
-      image: 'http://12345653.com',
+      image: '',
       slug: input.title ? slugify(input.title) : undefined,
     },
   });

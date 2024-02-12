@@ -1,7 +1,6 @@
-import * as api from '@/features/articles/api';
-import { UpdateArticleInput } from '@/features/articles/type';
-import * as validator from '@/features/articles/validator';
-
+import { UpdateArticleInput } from '@/features/articles/admin/type';
+import * as api from '@/features/articles/admin/api';
+import * as validators from '@/features/articles/admin/validator';
 interface Params {
   params: {
     id: string;
@@ -11,7 +10,7 @@ interface Params {
 //Update
 export const PATCH = async (req: Request, { params: { id } }: Params) => {
   const form = await (req.json() as Promise<UpdateArticleInput>);
-  const formValidation = await validator.update.safeParseAsync(form);
+  const formValidation = await validators.update.safeParseAsync(form);
   if (!formValidation.success) {
     return new Response(JSON.stringify(formValidation.error), {
       status: 422,
@@ -31,7 +30,7 @@ export const PATCH = async (req: Request, { params: { id } }: Params) => {
 //Delete
 export const DELETE = async (_req: Request, { params: { id } }: Params) => {
   const index = await api.remove(+id);
-  if (index === -1) {
+  if (index === null) {
     return new Response(null, { status: 404 });
   }
 

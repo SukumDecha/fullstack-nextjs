@@ -2,7 +2,8 @@ import { cn } from '@/features/shadcn/utils';
 import './globals.css';
 
 import { Inter as FontSans } from 'next/font/google';
-import Header from '@/features/ui/components/Header';
+import ClientProviders from '@/features/shared/components/ClientProviders';
+import Toast from '@/features/ui/components/Toast';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -24,11 +25,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'bg-background min-h-screen font-sans antialiased',
+          'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
         )}
       >
-        {children}
+        <ClientProviders>
+          {children}
+          <Toast />
+        </ClientProviders>
       </body>
     </html>
   );
