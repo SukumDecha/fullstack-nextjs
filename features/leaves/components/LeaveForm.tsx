@@ -1,6 +1,6 @@
 'use client';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import { AddLeaveInput, Leave, UpdateLeaveInput } from '../type';
+import { AddLeaveInput, LeaveDetails, UpdateLeaveInput } from '../type';
 import { capitalize } from 'lodash';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as validators from '../validators';
@@ -30,7 +30,7 @@ export type LeaveFormProps =
     }
   | {
       kind: 'edit';
-      leave: Leave;
+      leave: LeaveDetails;
       onSubmit: SubmitHandler<UpdateLeaveInput>;
     };
 

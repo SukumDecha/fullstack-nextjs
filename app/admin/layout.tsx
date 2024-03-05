@@ -5,6 +5,7 @@ import { BellRing, Book, LayoutDashboard, Stamp, Users } from 'lucide-react';
 import SidebarLink from '@/features/ui/components/SidebarLink';
 import Link from 'next/link';
 import Image from 'next/image';
+import ProtectedResource from '@/features/auth/guards/ProtectedResource';
 interface AdminLayoutProps {
   children: ReactNode;
 }
@@ -31,38 +32,53 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
               className="flex flex-col p-2
                 "
             >
-              <div className="border-b border-gray-100 py-4">
-                <SidebarLink
-                  title="Dashboard"
-                  href="/admin/dashboard"
-                  Icon={LayoutDashboard}
-                />
-              </div>
+              <ProtectedResource roles={['ADMIN', 'MANAGER']}>
+                <div className="border-b border-gray-100 py-4">
+                  <SidebarLink
+                    title="Dashboard"
+                    href="/admin/dashboard"
+                    Icon={LayoutDashboard}
+                  />
+                </div>
+              </ProtectedResource>
               <ul className="space-y-1 pt-4">
-                <li>
-                  <SidebarLink title="Users" href="/admin/users" Icon={Users} />
-                </li>
-                <li>
-                  <SidebarLink
-                    title="Leaves"
-                    href="/admin/leaves"
-                    Icon={Stamp}
-                  />
-                </li>
-                <li>
-                  <SidebarLink
-                    title="Announcements"
-                    href="/admin/announcements"
-                    Icon={BellRing}
-                  />
-                </li>
-                <li>
-                  <SidebarLink
-                    title="Blog"
-                    href="/admin/articles"
-                    Icon={Book}
-                  />
-                </li>
+                <ProtectedResource roles={['ADMIN', 'MANAGER']}>
+                  <li>
+                    <SidebarLink
+                      title="Users"
+                      href="/admin/users"
+                      Icon={Users}
+                    />
+                  </li>
+                </ProtectedResource>
+                <ProtectedResource roles={['ADMIN', 'MANAGER']}>
+                  <li>
+                    <SidebarLink
+                      title="Leaves"
+                      href="/admin/leaves"
+                      Icon={Stamp}
+                    />
+                  </li>
+                </ProtectedResource>
+
+                <ProtectedResource roles={['ADMIN', 'MANAGER']}>
+                  <li>
+                    <SidebarLink
+                      title="Announcements"
+                      href="/admin/announcements"
+                      Icon={BellRing}
+                    />
+                  </li>
+                </ProtectedResource>
+                <ProtectedResource roles={['ADMIN', 'MANAGER']}>
+                  <li>
+                    <SidebarLink
+                      title="Blog"
+                      href="/admin/articles"
+                      Icon={Book}
+                    />
+                  </li>
+                </ProtectedResource>
               </ul>
             </nav>
           </div>

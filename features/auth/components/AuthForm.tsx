@@ -44,7 +44,7 @@ const AuthForm = ({ kind, onSubmit }: AuthFormProps) => {
           },
   });
   return (
-    <div className="" mx-auto max-w-xl>
+    <div className="mx-auto max-w-xl"> 
       <h2 className="mb-4 border-b border-dotted pb-4 text-center text-2xl font-bold text-gray-900 ">
         {capitalize(kind)}
       </h2>
@@ -100,7 +100,7 @@ const AuthForm = ({ kind, onSubmit }: AuthFormProps) => {
               </FormItem>
             )}
           ></FormField>
-          <Button type="submit" className="absolute " right-0>
+          <Button type="submit" className="absolute right-0" >
             {capitalize(kind)}
           </Button>
         </form>

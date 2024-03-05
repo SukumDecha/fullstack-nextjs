@@ -5,7 +5,7 @@ import { slugify } from '@/features/shared/helpers/slugify';
 import { revalidatePath } from 'next/cache';
 import { saveFile } from '@/features/shared/helpers/file';
 
-export const add = async (input: z.infer<typeof validators.add>) => {
+export const add = async (userId: number, input: z.infer<typeof validators.add>) => {
   if (!input.image) {
     throw Error('No image uploaded');
   }
@@ -14,7 +14,7 @@ export const add = async (input: z.infer<typeof validators.add>) => {
   const article = await db.article.create({
     data: {
       ...input,
-      userId: 1,
+      userId,
       image,
       slug: slugify(input.title),
     },

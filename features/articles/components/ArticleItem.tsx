@@ -11,9 +11,9 @@ import { truncate } from 'lodash';
 import Image from 'next/image';
 import { getImagePath } from '@/features/shared/helpers/upload';
 
-const ArticleItem = ({ id, title, excerpt, image }: types.ArticleItem) => {
+const ArticleItem = ({ slug, title, excerpt, image }: types.ArticleItem) => {
   return (
-    <Link href={`/articles/${id}`}>
+    <Link href={`/articles/${slug}`}>
       <Card className="h-full">
         <div className="relative h-[200px]">
           <Image

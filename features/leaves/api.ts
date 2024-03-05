@@ -2,8 +2,11 @@ import { Leave } from '@prisma/client';
 import { AddLeaveInput, UpdateLeaveInput } from './type';
 import db from '@/features/shared/db';
 
-export const findAll = async () => {
+export const findAll = async (userId: number) => {
   const leaves = db.leave.findMany({
+    where: {
+      userId,
+    },
     select: {
       id: true,
       reason: true,
@@ -23,22 +26,17 @@ export const findById = async (id: number) => {
     where: {
       id,
     },
-    select: {
-      id: true,
-      leaveDate: true,
-      reason: true,
-    },
-  });
+ });
 
   if (!leave) throw new Error('leave not found');
 
   return leave;
 };
-export const add = async (input: AddLeaveInput) => {
+export const add = async (userId: number, input: AddLeaveInput) => {
   const leave = await db.leave.create({
     data: {
       ...input,
-      userId: 1,
+      userId,
     },
   });
 

@@ -1,12 +1,14 @@
 import * as api from '@/features/articles/admin/api';
-import { AddArticleInput } from '@/features/articles/admin/type';
 import { revalidatePath } from 'next/cache';
-import * as validator from '@/features/articles/admin/validator';
+import { getServerAuthSession } from '@/features/auth/auth';
 
 export const POST = async (req: Request) => {
+  const session = await getServerAuthSession();
+  if (!session) return Response.json({ err: 'Please Login' }, { status: 401 });
+
   const formData = await req.formData();
   const image = formData.get('image') as File | null;
-  const article = await api.add({
+  const article = await api.add(+session.user.id, {
     title: formData.get('title') as string,
     excerpt: formData.get('excerpt') as string,
     content: formData.get('content') as string,
@@ -14,10 +16,7 @@ export const POST = async (req: Request) => {
   });
 
   revalidatePath('/articles');
-  return new Response(JSON.stringify(article), {
+  return Response.json(article, {
     status: 201,
-    headers: {
-      'Content-Type': 'application/json',
-    },
   });
 };

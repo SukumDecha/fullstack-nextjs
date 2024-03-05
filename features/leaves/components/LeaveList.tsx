@@ -1,6 +1,6 @@
 'use client';
 
-import { Leave } from '@/features/leaves/type';
+import * as types from '@/features/leaves/type';
 import { Button } from '@/features/shadcn/components/ui/button';
 import { Separator } from '@/features/shadcn/components/ui/separator';
 import { Plus } from 'lucide-react';
@@ -8,11 +8,12 @@ import { useRouter } from 'next/navigation';
 import LeaveItem from './LeaveItem';
 
 interface LeaveListProps {
-  leaves: Leave[];
+  leaves: types.LeaveItem[];
 }
 
 const LeaveList = ({ leaves }: LeaveListProps) => {
   const router = useRouter();
+  
   return (
     <section>
       <h1 className="my-4 text-center text-4xl font-bold">All Leaves</h1>

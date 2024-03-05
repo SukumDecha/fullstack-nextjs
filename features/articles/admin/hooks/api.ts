@@ -45,7 +45,7 @@ export const useCreateArticle = () => {
       formData.append('content', form.content);
       if (form.image) formData.append('image', form.image);
 
-      const res = await fetch('http://localhost:3000/api/admin/articles', {
+      const res = await fetch(`${process.env.NEXTAPP_URL}/api/admin/articles`, {
         method: 'POST',
         body: formData,
        });

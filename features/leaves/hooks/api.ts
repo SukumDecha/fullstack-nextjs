@@ -10,7 +10,7 @@ export const useGetLeaves = () => {
     queryKey: ['leaves'],
     queryFn: async () => {
       const res = await fetch('http://localhost:3000/api/leaves');
-      const leaves = await (res.json() as Promise<LeaveDetails[]>);
+      const leaves = await (res.json() as Promise<LeaveItem[]>);
 
       return leaves;
     },
@@ -22,7 +22,7 @@ export const useGetLeave = (id: number) => {
     queryKey: ['leaves', id],
     queryFn: async () => {
       const res = await fetch(`http://localhost:3000/api/leaves/${id}`);
-      const leave = (await res.json()) as Promise<LeaveItem>;
+      const leave = (await res.json()) as Promise<LeaveDetails>;
 
       return leave;
     },

@@ -4,9 +4,11 @@ import { SignIn } from '../types';
 import AuthForm from './AuthForm';
 import { useUiStore } from '@/features/ui/store';
 import { signIn } from 'next-auth/react';
+
 const Login = () => {
   const router = useRouter();
   const setToast = useUiStore((state) => state.setToast);
+
   const submit = async (credentials: SignIn) => {
     const result = await signIn('credentials', {
       ...credentials,

@@ -1,6 +1,7 @@
 'use client';
 
 import AuthMenu from '@/features/auth/components/AuthMenu';
+import ProtectedResource from '@/features/auth/guards/ProtectedResource';
 import { Button } from '@/features/shadcn/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -32,7 +33,9 @@ const Header = () => {
           height={50}
         />
       </Link>
-      <NavLink path="/admin">Admins</NavLink>
+      <ProtectedResource roles={['ADMIN', 'MANAGER']}>
+        <NavLink path="/admin">Admins</NavLink>
+      </ProtectedResource>
       <NavLink path="/leaves">Leaves</NavLink>
       <NavLink path="/articles">Articles</NavLink>
       <NavLink path="/announcements">Announcements</NavLink>

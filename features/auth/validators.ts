@@ -16,5 +16,5 @@ export const profile = z.object({
     (v) => (v === '' ? undefined : v),
     z.string().min(8).optional(),
   ),
-  image,
+  image: image.optional(),
 });
